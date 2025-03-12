@@ -1,13 +1,17 @@
 import React from 'react'
 
-const AddSelectForm = ({ defaultLabel, optionList }) => {
+const AddSelectForm = ({ id, defaultLabel, options, selectedOption,
+    handleChangeSelectedItem, status, loading, updateDayById }) => {
+
+
     return (
         <form className='add-select-form'>
             <div className='add-select-form__block'>
-                <Dropdown defaultLabel={defaultLabel} options={optionList} />
-                <button type='button'>+</button>
+                <Dropdown defaultLabel={defaultLabel} options={options} selectedOption={selectedOption}
+                    handleDropdownSelect={handleChangeSelectedItem} />
+                <button type='button' onClick={() => updateDayById({ id, updateDayById: selectedOption })}>{!loading ? '+' : '...'}</button>
             </div>
-            <Message message={message} />
+            <Message message={status} />
         </form>
     )
 }

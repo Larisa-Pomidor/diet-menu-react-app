@@ -1,12 +1,18 @@
 import React from 'react'
 import AddSelectForm from './AddSelectForm';
 
-const AddSymptomForm = () => {
+const AddSymptomForm = ({ id, symptoms, status, loading, updateDayById }) => {
 
-    const symptomList = [];
-    const message = [];
+    const [selectedOption, setSelectedOption] = useState({ symptomId: undefined });
+
+    const handleChangeSelectedItem = (id) => {
+        setSelectedOption({ symptomId: id })
+    };
+
     return (
-        <AddSelectForm defaultLabel='Select a product' options={symptomList} message={message} />
+        <AddSelectForm id={id} defaultLabel='Select a symptom' options={symptoms}
+            selectedOption={selectedOption} handleChangeSelectedItem={handleChangeSelectedItem}
+            status={status} loading={loading} updateDayById={updateDayById} setSelectedOption={setSelectedOption} />
     )
 }
 

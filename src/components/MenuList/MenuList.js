@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import MenuListItem from './MenuListItem';
 
 const MenuList = () => {
 
-    const menuList = [];
+    const { fetchDays } = useStoreActions((actions) => actions.calendarModel);
+
+    const { menuList } = useStoreState(state => ({
+
+        menuList: state.calendarModel.menuList
+    }));
+
+    useEffect(() => {
+        fetchDays();
+    }, [])
 
     return (
         <section className='menu-list'>
@@ -11,7 +20,7 @@ const MenuList = () => {
                 <div className='container'>
                     <div className='menu-list__inner'>
                         {
-                            menuList.map((item, index) => {
+                            menuList && menuList.map((item, index) => {
                                 <MenuListItem key={index} item={item} />
                             })
                         }

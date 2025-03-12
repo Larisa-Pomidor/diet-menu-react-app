@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import './Dropdown.css'
 
-const Dropdown = ({ defaultLabel, options, handleDropdownSelect }) => {
+const Dropdown = ({ defaultLabel, options, selectedOption, handleDropdownSelect }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
@@ -25,7 +25,7 @@ const Dropdown = ({ defaultLabel, options, handleDropdownSelect }) => {
                 className={`dropdown__button ${isOpen ? 'dropdown__button_active' : ''}`}
                 onClick={toggleDropdown}
             >
-                {defaultLabel}
+                {!selectedOption ? defaultLabel : options.filter(option => option.id === selectedOption).name}
             </button>
 
             {isOpen && (
@@ -44,7 +44,7 @@ const DropdownItem = ({ option, handleDropdownSelect }) => {
     return (
         <div className='dropdown-item'
             onClick={() => {
-                handleDropdownSelect({ value: option });
+                handleDropdownSelect(id);
             }}>
             <div className="dropdown-item__value" >
                 {option.name}
