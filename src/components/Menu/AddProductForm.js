@@ -1,7 +1,7 @@
 import React from 'react'
 import AddSelectForm from './AddSelectForm';
 
-const AddProductForm = ({ id, products, status, loading, updateDayById }) => {
+const AddProductForm = ({ id, products, status, loading, addDayData }) => {
 
     const [selectedOption, setSelectedOption] = useState({ symptomId: undefined });
 
@@ -12,7 +12,7 @@ const AddProductForm = ({ id, products, status, loading, updateDayById }) => {
     return (
         <AddSelectForm id={id} defaultLabel='Select a product' options={products}
             selectedOption={selectedOption} handleChangeSelectedItem={handleChangeSelectedItem}
-            status={status} loading={loading} updateDayById={updateDayById} setSelectedOption={setSelectedOption} />
+            status={status} loading={loading} addDayData={addDayData} setSelectedOption={setSelectedOption} />
     )
 }
 

@@ -11,9 +11,11 @@ const DayMenu = () => {
     const { fetchProducts } = useStoreActions((actions) => actions.productModel);
     const { fetchSymptoms } = useStoreActions((actions) => actions.symptomModel);
 
-    const { dayById, updateDayById, status, loading, products, symptoms } = useStoreState(state => ({
+    const { addDaySymptom } = useStoreActions((actions) => actions.calendarModel);
+    const { addDayProduct } = useStoreActions((actions) => actions.calendarModel);
 
-        updateDayById: state.calendarModel.updateDayById,
+    const { dayById, status, loading, products, symptoms } = useStoreState(state => ({
+
         dayById: state.calendarModel.dayById,
         status: state.calendarModel.status,
         loading: state.calendarModel.loading,
@@ -48,7 +50,7 @@ const DayMenu = () => {
                                 })
                             }
                             <AddProductForm id={id} products={products}
-                                updateDayById={updateDayById} status={status} loading={loading} />
+                                addDayData={addDayProduct} status={status} loading={loading} />
                         </div>
                         <div className='day-menu__block'>
                             {
@@ -58,7 +60,7 @@ const DayMenu = () => {
                                 })
                             }
                             <AddSymptomForm id={id} symptoms={symptoms}
-                                updateDayById={updateDayById} status={status} loading={loading} />
+                                addDayData={addDaySymptom} status={status} loading={loading} />
                         </div>
                         <div className='day-menu__block'>
                             <EditDescriptionForm id={id} updateDayById={updateDayById}
