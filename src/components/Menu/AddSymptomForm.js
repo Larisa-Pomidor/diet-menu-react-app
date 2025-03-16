@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AddSelectForm from './AddSelectForm';
 
 const AddSymptomForm = ({ id, symptoms, status, loading, addDayData }) => {
@@ -11,7 +11,7 @@ const AddSymptomForm = ({ id, symptoms, status, loading, addDayData }) => {
 
     return (
         <AddSelectForm id={id} defaultLabel='Select a symptom' options={symptoms}
-            selectedOption={selectedOption} handleChangeSelectedItem={handleChangeSelectedItem}
+            selectedOption={selectedOption.symptomId} handleChangeSelectedItem={handleChangeSelectedItem}
             status={status} loading={loading} addDayData={addDayData} setSelectedOption={setSelectedOption} />
     )
 }

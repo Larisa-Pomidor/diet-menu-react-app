@@ -1,0 +1,33 @@
+.symptom-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.symptom-item__color {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+
+.symptom-item__block {
+    display: flex;
+    align-items: center;
+}
+
+.symptom-item__block_tools {
+    background: #e43838;
+    zoom: 0.6;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.symptom-item__block_color {
+    margin-right: 10px;
+}

@@ -1,16 +1,17 @@
 import React from 'react'
-import Day from './day'
+import Day from './Day'
+import './Month.css'
 
-const Month = (month) => {
+const Month = ({ month, monthName }) => {
     return (
         <section className='month'>
             <div className='month__inner'>
-                <div className='month__header'>{month.name} / {month.year}</div>
+                <div className='month__header'>{monthName}</div>
                 <div className='month__data'>
                     {
-                        month.map((day) => {
+                        month && month.map((day) =>
                             <Day key={day.id} day={day} />
-                        })
+                        )
                     }
                 </div>
             </div>

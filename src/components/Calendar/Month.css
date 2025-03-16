@@ -1,0 +1,17 @@
+.month__inner {
+    background: linear-gradient(#d8dbe4, #8a95a7);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.month__data {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.month__header {
+    margin-bottom: 10px;
+    text-align: center;
+    color: black;
+}

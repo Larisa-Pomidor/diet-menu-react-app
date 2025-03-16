@@ -1,0 +1,20 @@
+.day-menu__no-content {
+    margin-bottom: 10px;
+    opacity: 0.4;
+    font-size: 11px;
+}
+
+.day-menu__block {
+    margin-bottom: 20px;
+}
+
+.day-menu__type {
+    border: solid 1px #ffffff00;
+    padding: 1px 20px;
+    border-radius: 30px;
+    color: black;
+    box-shadow: 1px 1px 1px 1px #0000005e;
+    width: fit-content;
+    margin-bottom: 20px;
+    background: linear-gradient(#1bfbbf, #0496a5);
+}

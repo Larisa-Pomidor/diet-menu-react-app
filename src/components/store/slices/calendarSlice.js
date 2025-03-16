@@ -1,7 +1,8 @@
-import { action, thunk } from "easy-peasy";
+import axios from "axios";
+import { action, computed, thunk } from "easy-peasy";
 
-// const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+//const API_BASE_URL = 'http://localhost:8080';
 
 const calendarModel = {
     dayById: null,
@@ -16,30 +17,30 @@ const calendarModel = {
         state.days = payload;
     }),
     updateDayByIdInState: action((state, payload) => {
-        state.dayById = payload;
+        state.dayById.note = payload.note;
     }),
-    removeDaySymptomInState: action((state, payload) => {
-        state.dayById = state.dayById.symptoms.filter(symptom => symptom.id !== payload);
-        state.days = state.days.map(day => ({
-            ...day,
-            symptoms: day.symptoms.filter(symptom => symptom.id !== payload)
-        }));
+    removeDaySymptomInState: action((state, { dayId, dataId }) => {
+        state.dayById.symptoms = state.dayById.symptoms.filter(symptom => symptom.id !== dataId);
+        state.days = state.days.map(day => day.id === dayId ?
+            { ...day, symptoms: day.symptoms.filter(symptom => symptom.id !== dataId) }
+            : day
+        );
     }),
-    removeDayProductInState: action((state, payload) => {
-        state.dayById = state.dayById.products.filter(product => product.id !== payload);
-        state.days = state.days.map(day => ({
-            ...day,
-            products: day.products.filter(product => product.id !== payload)
-        }));
+    removeDayProductInState: action((state, { dayId, dataId }) => {
+        state.dayById.products = state.dayById.products.filter(product => product.id !== dataId);
+        state.days = state.days.map(day => day.id === dayId ?
+            { ...day, products: day.products.filter(product => product.id !== dataId) }
+            : day
+        );
     }),
     addDaySymptomInState: action((state, { id, symptom }) => {
-        state.dayById.symptoms.push(payload);
+        state.dayById.symptoms.push(symptom);
         state.days = state.days.map(day =>
             day.id === id && day.symptoms.push(symptom)
         );
     }),
     addDayProductInState: action((state, { id, product }) => {
-        state.dayById.products.push(payload);
+        state.dayById.products.push(product);
         state.days = state.days.map(day =>
             day.id === id && day.products.push(product)
         );
@@ -54,7 +55,9 @@ const calendarModel = {
     fetchDayById: thunk(async (actions, id) => {
         actions.setLoading(true);
         try {
-            const response = await axios.get(`${API_BASE_URL}/days/${id}`);
+            actions.setDayById();
+
+            const response = await axios.get(`${API_BASE_URL}/calendar/${id}`);
 
             if (response.status === 204) {
                 actions.setDayById({});
@@ -75,7 +78,7 @@ const calendarModel = {
 
     fetchDays: thunk(async (actions) => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/days`);
+            const response = await axios.get(`${API_BASE_URL}/calendar`);
 
             if (response.status === 204) {
                 actions.setDays([]);
@@ -92,7 +95,7 @@ const calendarModel = {
     updateDayById: thunk(async (actions, { id, updatedDay }) => {
         actions.setLoading(true);
         try {
-            const response = await axios.put(`${API_BASE_URL}/days/${id}`, updatedDay);
+            const response = await axios.put(`${API_BASE_URL}/calendar/${id}`, updatedDay);
             actions.updateDayByIdInState(response.data);
         } catch (error) {
 
@@ -104,8 +107,8 @@ const calendarModel = {
     addDaySymptom: thunk(async (actions, { dayId, dataId }) => {
         actions.setLoading(true);
         try {
-            const response = await axios.post(`${API_BASE_URL}/days/${dayId}/symptom/${dataId}`);
-            actions.addDaySymptomInState({ id, symptom: response.data });
+            const response = await axios.post(`${API_BASE_URL}/calendar/${dayId}/symptom/${dataId}`);
+            actions.addDaySymptomInState({ id: dataId, symptom: response.data });
         } catch (error) {
 
         } finally {
@@ -116,8 +119,8 @@ const calendarModel = {
     addDayProduct: thunk(async (actions, { dayId, dataId }) => {
         actions.setLoading(true);
         try {
-            const response = await axios.post(`${API_BASE_URL}/days/${dayId}/product/${dataId}`);
-            actions.addDayProductInState({ id, product: response.data });
+            const response = await axios.post(`${API_BASE_URL}/calendar/${dayId}/product/${dataId}`);
+            actions.addDayProductInState({ id: dataId, product: response.data });
         } catch (error) {
 
         } finally {
@@ -125,11 +128,11 @@ const calendarModel = {
         }
     }),
 
-    deleteDaySymptomById: thunk(async (actions, id) => {
+    deleteDaySymptomById: thunk(async (actions, { dayId, dataId }) => {
         actions.setLoading(true);
         try {
-            await axios.delete(`${API_BASE_URL}/days/symptom/${id}`);
-            actions.removeDaySymptomInState(id);
+            await axios.delete(`${API_BASE_URL}/calendar/${dayId}/symptom/${dataId}`);
+            actions.removeDaySymptomInState({ dayId, dataId });
         } catch (error) {
 
         } finally {
@@ -137,11 +140,22 @@ const calendarModel = {
         }
     }),
 
-    deleteDayProductById: thunk(async (actions, id) => {
+    deleteDayProductById: thunk(async (actions, { dayId, dataId }) => {
         actions.setLoading(true);
         try {
-            await axios.delete(`${API_BASE_URL}/days/product/${id}`);
-            actions.removeDayProductInState(id);
+            await axios.delete(`${API_BASE_URL}/calendar/${dayId}/product/${dataId}`);
+            actions.removeDayProductInState({ dayId, dataId });
+        } catch (error) {
+
+        } finally {
+            actions.setLoading(false);
+        }
+    }),
+
+    generateMenu: thunk(async (actions, _) => {
+        actions.setLoading(true);
+        try {
+            await axios.post(`${API_BASE_URL}/random`);
         } catch (error) {
 
         } finally {
@@ -151,17 +165,38 @@ const calendarModel = {
 
     menuList: computed(state => {
         const today = new Date();
-        const dayOfWeek = today.getDay();
+        let dayOfWeek = today.getDay();
+
+        dayOfWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+
         const startOfWeek = new Date(today);
         startOfWeek.setDate(today.getDate() - dayOfWeek);
+
         const endOfPeriod = new Date(startOfWeek);
         endOfPeriod.setDate(startOfWeek.getDate() + 27);
 
-        return state.days.filter(day => {
-            const dayDate = new Date(day.date);
-            return dayDate >= startOfWeek && dayDate <= endOfPeriod;
-        });
-    })
+        return state.days
+            .filter(day => {
+                const dayDate = new Date(day.date);
+                return dayDate >= startOfWeek && dayDate <= endOfPeriod;
+            })
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+    }),
+
+    groupedCalendar: computed(state => {
+        if (state.days) return state.days.reduce((acc, day) => {
+            const date = new Date(day.date);
+            const yearMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+
+            if (!acc[yearMonth]) {
+                acc[yearMonth] = [];
+            }
+
+            acc[yearMonth].push(day);
+            acc[yearMonth].sort((a, b) => new Date(a.date) - new Date(b.date));
+            return acc;
+        }, {})
+    }),
 };
 
 export default calendarModel;

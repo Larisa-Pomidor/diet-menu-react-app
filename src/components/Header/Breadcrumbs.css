@@ -1,0 +1,12 @@
+.breadcrumbs {
+    position: fixed;
+    top: 19px;
+    left: 10px;
+}
+
+.breadcrumbs a {
+    color: black;
+    text-decoration: none;
+    opacity: 0.8;
+    font-size: 12px;
+}

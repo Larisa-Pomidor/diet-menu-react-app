@@ -1,16 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Message from '../Message'
+import './EditDescriptionForm.css'
 
-const EditDescriptionForm = ({ id, description, updateDayById, status, loading }) => {
+const EditDescriptionForm = ({ id, note, updateDayById, status, loading }) => {
 
-    const [description, setDescription] = useState(description || '');
+    const [newNote, setNewNote] = useState(note || '');
 
-    const handleChangeDescription = (e) => {
-        const { name, value } = e.target;
-        setDescription(
-            {
-                [name]: value
-            }
+    const handleChangeNote = (e) => {
+        setNewNote(
+            e.target.value
         );
     };
 
@@ -18,13 +16,13 @@ const EditDescriptionForm = ({ id, description, updateDayById, status, loading }
         <form className='edit-from'>
             <div className='edit-from__inner'>
                 <div className='edit-from__input'>
-                    <input
-                        value={description}
-                        name='description'
-                        onChange={handleChangeDescription}
+                    <textarea
+                        value={newNote || ''}
+                        name='note'
+                        onChange={handleChangeNote}
                     />
                 </div>
-                <button type='button' onClick={() => updateDayById({ id, updateDayById: description })}>
+                <button type='button' onClick={() => updateDayById({ id, updatedDay: { description: note } })}>
                     {!loading ? 'Edit' : 'Loading ...'}
                 </button>
                 <Message message={status} />

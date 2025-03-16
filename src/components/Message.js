@@ -4,7 +4,7 @@ const Message = (message) => {
     return (
         <section className='message'>
             <div className='message__inner'>
-                {message}
+                {/* {message} */}
             </div>
         </section>
     )

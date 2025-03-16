@@ -25,8 +25,11 @@
     color: var(--light-color);
     background: #484d53;
     padding: 10px 20px;
-    border-radius: 10px;
+    border-radius: 10px 0 0 10px;
     cursor: pointer;
+    height: 40px;
+    background: linear-gradient(90deg, #484d53, 90%, #e2691a);
+    box-shadow: -1px 1px 1px #0000005e;
 }
 
 .dropdown-item {
@@ -34,7 +37,7 @@
 }
 
 .dropdown__button_active {
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px 0 0 0;
 }
 
 .dropdown-item__checkbox {
@@ -50,4 +53,16 @@
 
 .dropdown-item__value {
     font-size: 14px;
+}
+
+.dropdown__list {
+    background: #212121;
+    display: flex;
+    flex-wrap: wrap;
+    border: none;
+    margin-top: 3px;
+}
+
+.dropdown-item__value {
+    font-size: 12px;
 }

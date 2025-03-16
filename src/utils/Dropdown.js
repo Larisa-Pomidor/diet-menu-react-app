@@ -21,11 +21,11 @@ const Dropdown = ({ defaultLabel, options, selectedOption, handleDropdownSelect 
 
     return (
         <div className='dropdown' ref={dropdownRef}>
-            <button
+            <button type='button'
                 className={`dropdown__button ${isOpen ? 'dropdown__button_active' : ''}`}
                 onClick={toggleDropdown}
             >
-                {!selectedOption ? defaultLabel : options.filter(option => option.id === selectedOption).name}
+                {!selectedOption ? defaultLabel : options.find(option => option.id === selectedOption).name}
             </button>
 
             {isOpen && (
@@ -44,7 +44,7 @@ const DropdownItem = ({ option, handleDropdownSelect }) => {
     return (
         <div className='dropdown-item'
             onClick={() => {
-                handleDropdownSelect(id);
+                handleDropdownSelect(option.id);
             }}>
             <div className="dropdown-item__value" >
                 {option.name}

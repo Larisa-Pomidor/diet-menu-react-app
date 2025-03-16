@@ -1,22 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Month from './Month';
 import Legend from './Legend';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import Breadcrumbs from '../Header/Breadcrumbs';
 
 const Calendar = () => {
 
-    const calendar = [];
+    const { fetchDays } = useStoreActions((actions) => actions.calendarModel);
+    const { groupedCalendar } = useStoreState(state => ({
+        groupedCalendar: state.calendarModel.groupedCalendar,
+    }));
+
+    useEffect(() => {
+        fetchDays();
+    }, [fetchDays])
 
     return (
         <section className='calendar'>
             <div className='calendar__outer'>
-                <div className='calendar__inner'>
-                    <Legend />
-                    <div className='calendar__data'>
-                        {
-                            calendar.map((month) => {
-                                <Month key={month.id} month={month} />
-                            })
-                        }
+                <Breadcrumbs path='/home' />
+                <div className='container'>
+                    <div className='calendar__inner'>
+                        <Legend />
+                        <div className='calendar__data'>
+                            {
+                                groupedCalendar && Object.entries(groupedCalendar).map(([monthName, month], index) =>
+                                    <Month key={index} month={month} monthName={monthName} />
+                                )
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

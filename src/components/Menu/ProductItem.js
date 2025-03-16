@@ -1,22 +1,33 @@
 import { useStoreActions } from 'easy-peasy';
 import React from 'react'
 
-const ProductItem = (item, index) => {
+import './ProductItem.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRemove } from '@fortawesome/free-solid-svg-icons';
+
+const ProductItem = ({ item, dayId }) => {
 
     const { deleteDayProductById } = useStoreActions((actions) => actions.calendarModel);
 
     return (
         <section className='product-item'>
-            <div className='product-item__block'>
-                <div className='product-item__index'>{index}</div>
-                <div className='product-item__name'>{item.name}</div>
-            </div>
-            <div className='product-item__block product-item__block_image'>
-                <div className='product-item__image'>{item.imageUrl}</div>
-            </div>
-            <div className='product-item__block product-item__block_tools' onClick={() => deleteDayProductById(item.id)}>
-                Delete
-            </div>
+            {item && <>
+                <div className='product-item__block product-item__block_image'>
+                    {item.imageUrl &&
+                        <div className='product-item__image'>
+                            <img src={`${require(`../../assets/img/products/${item.imageUrl}`)}`} alt='' />
+                        </div>
+                    }
+                </div>
+                <div className='product-item__block'>
+                    <div className='product-item__name'>{item.name}</div>
+                </div>
+                <div className='product-item__block product-item__block_tools'
+                    onClick={() => deleteDayProductById({ dayId: dayId, dataId: item.id })}>
+                    <FontAwesomeIcon icon={faRemove} />
+                </div>
+            </>
+            }
         </section>
     )
 }
