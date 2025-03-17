@@ -1,6 +1,6 @@
 # Personal Diet Tracker
 
-![App Screenshot](/assets/img/readme_screenshot.jpg)  
+![App Screenshot](/public/assets/img/readme_screenshot.jpg)  
 *A simple and efficient diet tracking application built with React and Netlify Functions.*
 
 ## 🚀 Features
