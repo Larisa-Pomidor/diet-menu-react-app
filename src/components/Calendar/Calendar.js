@@ -3,6 +3,7 @@ import Month from './Month';
 import Legend from './Legend';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import Breadcrumbs from '../Header/Breadcrumbs';
+import './Calendar.css'
 
 const Calendar = () => {
 
