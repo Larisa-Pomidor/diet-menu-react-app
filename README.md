@@ -32,7 +32,7 @@ This will run the app on `http://localhost:3000/`.
 
 ## 🚀 Backend
 
-### 1. Clone the [repository] (https://github.com/Larisa-Pomidor/netlify-backend-flashcards)
+### 1. Clone the [repository](https://github.com/Larisa-Pomidor/netlify-backend-flashcards)
 
 ### 2. Connect the repository to [Netlify](https://www.netlify.com/)
 
