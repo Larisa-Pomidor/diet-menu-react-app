@@ -18,3 +18,13 @@
     margin-top: -6px;
     border-radius: 0 0px 10px 10px;
 }
+
+.edit-form__cheated {
+    margin-bottom: 10px;
+    color: grey;
+    zoom: 1.5;
+}
+
+.edit-form__cheated_selected {
+    color: rgb(213, 1, 1);
+}

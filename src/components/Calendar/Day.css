@@ -29,3 +29,29 @@
     background: white;
     border-radius: 100%;
 }
+
+.day__inner {
+    position: relative;
+}
+
+.day__inner_cheated {
+    -webkit-box-shadow: inset 0px 0px 0px 1px rgb(223, 4, 4);
+    -moz-box-shadow: inset 0px 0px 0px 1px rgb(223, 4, 4);
+    box-shadow: inset 0px 0px 0px 1px rgb(223, 4, 4);
+    filter: grayscale(1);
+}
+
+.day__warning {
+    width: 19px;
+    height: 18px;
+    padding: 0px 0px 1px 1px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: rgb(224, 1, 1);
+    zoom: 0.9;
+}

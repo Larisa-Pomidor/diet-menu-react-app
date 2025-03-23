@@ -18,6 +18,7 @@ const calendarModel = {
     }),
     updateDayByIdInState: action((state, payload) => {
         state.dayById.note = payload.note;
+        state.dayById.cheated = payload.cheated;
     }),
     removeDaySymptomInState: action((state, { dayId, dataId }) => {
         state.dayById.symptoms = state.dayById.symptoms.filter(symptom => symptom.id !== dataId);

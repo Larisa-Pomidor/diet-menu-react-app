@@ -90,7 +90,7 @@ const DayMenu = () => {
                             <div className='day-menu__block'>
                                 {
                                     <EditDescriptionForm id={id} updateDayById={updateDayById}
-                                        status={status} loading={loading} note={dayById.note} />
+                                        status={status} loading={loading} note={dayById.note} cheated={dayById.cheated} />
                                 }
                             </div>
                         </div>

@@ -3,8 +3,10 @@ import { symptomsColors } from '../../constants/symptomsColors';
 import { getDayFromDate } from '../../utils/DataUtils';
 import './Day.css'
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWarning } from '@fortawesome/free-solid-svg-icons';
 
-const Day = ({ day }) => {
+const Day = ({ day, isFiltered }) => {
 
     const [backgroundGradient, setBackgroundGradient] = useState(null);
 
@@ -30,13 +32,23 @@ const Day = ({ day }) => {
 
     return (
         <section className='day'>
-            <Link to={`/day/${day.id}`}>
-                <div className='day__inner' style={{ background: backgroundGradient }}>
-                    <div className='day__number'>
-                        {getDayFromDate(day.date)}
+            {day.date &&
+                <Link to={`/day/${day.id}`}>
+                    {console.log(day)}
+                    <div className={`day__inner ${(isFiltered && day.cheated) ? 'day__inner_cheated' : ''}`}
+                        style={{ background: backgroundGradient }}>
+                        {
+                            day.cheated &&
+                            <div className='day__warning'>
+                                <FontAwesomeIcon icon={faWarning} />
+                            </div>
+                        }
+                        <div className='day__number'>
+                            {getDayFromDate(day.date)}
+                        </div>
                     </div>
-                </div>
-            </Link>
+                </Link>
+            }
         </section>
     )
 }
