@@ -19,7 +19,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className='home__background'>
-                        <img src='/assets/img/background-1.svg' />
+                        <img src='/assets/img/background-1.svg' alt='' />
                     </div>
                 </div>
             </div>
