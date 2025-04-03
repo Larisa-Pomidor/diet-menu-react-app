@@ -12,9 +12,11 @@ const Month = ({ month, monthName }) => {
         <section className='month'>
             {month &&
                 <div className='month__inner'>
-                    <div className='month__header'>{monthName}
-                        <span onClick={() => setIsFiltered(prev => !prev)} ><FontAwesomeIcon icon={faWarning} /></span>
-                    </div>
+                    {monthName &&
+                        <div className='month__header'>{monthName}
+                            <span onClick={() => setIsFiltered(prev => !prev)} ><FontAwesomeIcon icon={faWarning} /></span>
+                        </div>
+                    }
                     <div className='month__data'>
                         {
                             month && month.map((day) =>

@@ -1,9 +1,10 @@
 .product-item {
     width: 25%;
-    display: inline-block;
+    display: inline-grid;
     padding: 5px;
     position: relative;
     box-sizing: border-box;
+    margin-bottom: 15px;
 }
 
 .product-item__block_image {
@@ -18,6 +19,13 @@
 
 .product-item__name {
     text-align: center;
+    margin: 10px 0;
+    font-size: 11px;
+    line-height: 100%;
+}
+
+.product-item__block_name {
+    height: 30px;
 }
 
 .product-item__block_tools {

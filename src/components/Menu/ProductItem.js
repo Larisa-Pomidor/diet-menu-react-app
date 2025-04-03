@@ -19,7 +19,7 @@ const ProductItem = ({ item, dayId }) => {
                         </div>
                     }
                 </div>
-                <div className='product-item__block'>
+                <div className='product-item__block product-item__block_name'>
                     <div className='product-item__name'>{item.name}</div>
                 </div>
                 <div className='product-item__block product-item__block_tools'

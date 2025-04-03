@@ -1,6 +1,7 @@
 import React from 'react'
 import Dropdown from '../../utils/Dropdown'
 import Message from '../Message'
+import './AddSelectForm.css'
 
 const AddSelectForm = ({ id, defaultLabel, options, selectedOption,
     handleChangeSelectedItem, status, loading, addDayData }) => {

@@ -26,6 +26,10 @@ const EditDescriptionForm = ({ id, note, cheated, updateDayById, status, loading
     return (
         <form className='edit-from'>
             <div className='edit-from__inner'>
+                <div className={`edit-form__cheated ${newCheated ? 'edit-form__cheated_selected' : ''}`}
+                    onClick={() => setNewCheated(prev => !prev)}>
+                    <FontAwesomeIcon icon={faWarning} />
+                </div>
                 <div className='edit-from__input'>
                     <textarea
                         value={newNote || ''}
@@ -33,10 +37,6 @@ const EditDescriptionForm = ({ id, note, cheated, updateDayById, status, loading
                         onChange={handleChangeNote}
                         placeholder='Type something ...'
                     />
-                </div>
-                <div className={`edit-form__cheated ${newCheated ? 'edit-form__cheated_selected' : ''}`}
-                    onClick={() => setNewCheated(prev => !prev)}>
-                    <FontAwesomeIcon icon={faWarning} />
                 </div>
                 <button type='button'
                     onClick={() => updateDayById({ id, updatedDay: { description: newNote, cheated: newCheated } })}>
