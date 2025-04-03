@@ -1,7 +1,3 @@
-.calendar__outer {
-    position: relative;
-}
-
 .calendar__data {
     display: flex;
     flex-direction: column;
